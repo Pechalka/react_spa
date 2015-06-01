@@ -12,6 +12,7 @@ var config = {
         path: path.join(__dirname, 'build') // выходная директория
     },
     resolve: {
+        root: path.resolve(__dirname, 'app'),
         extensions: ['', '.js', '.jsx'],
     },
     module: {

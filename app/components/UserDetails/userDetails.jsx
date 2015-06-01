@@ -5,7 +5,7 @@ var Navigation = Router.Navigation;
 
 var { Grid } = require('react-bootstrap');
 
-var http = require('../../utils/http');
+var http = require('utils/http');
 
 var UserDetails = React.createClass({
 	mixins : [Navigation],

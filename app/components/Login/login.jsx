@@ -3,7 +3,7 @@ var React = require('react');
 var { Navigation } = require('react-router');
 var { Grid, Row, Col, Well, Button, Input, Alert } = require('react-bootstrap');
 
-var auth = require('../../utils/auth');
+var auth = require('utils/auth');
 
 module.exports = React.createClass({
 	mixins : [Navigation],

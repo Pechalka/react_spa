@@ -5,17 +5,20 @@ var { Navigation }  = require('react-router');
 var { Button, Well, Input } = require('react-bootstrap');
 
 
-var actions = require('./../../actions');
-var users = require('./../../stores/UserStore');
+var actions = require('actions');
+var users = require('stores/UserStore');
 
 var Reflux = require('reflux');
+
+var requireAuth = require('utils/requireAuth');
 
 
 var Users = React.createClass({
 	mixins : [
 		Navigation,
 		Reflux.connect(users, 'users'),
-		React.addons.LinkedStateMixin
+		React.addons.LinkedStateMixin,
+		requireAuth
 	],
 	getInitialState: function() {
 		return {

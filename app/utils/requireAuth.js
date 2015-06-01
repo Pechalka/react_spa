@@ -4,8 +4,10 @@ module.exports = {
 	statics : {
 		willTransitionTo : function(transition, params, query, callback){
 			auth.getSession(function(loggedIn) {
-				if (loggedIn) callback();
-				else transition.redirect('/login', {}, {'nextPath' : transition.path});	
+
+				if (!loggedIn) transition.redirect('/login', {}, {'nextPath' : transition.path});
+
+				callback();
 			})
 		}
 	}

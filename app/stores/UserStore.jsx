@@ -1,8 +1,8 @@
 var React = require('react');
 
 var Reflux = require('reflux');
-var actions = require('./../actions');
-var http = require('../utils/http');
+var actions = require('actions');
+var http = require('utils/http');
 var _ = require('lodash');
 
 var _users = [];//state
