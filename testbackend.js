@@ -1,6 +1,7 @@
 var path = require('path');
 var bodyParser = require('body-parser');
 var express = require('express');
+var _ = require('lodash');
 
 var app = express();
 
@@ -38,6 +39,19 @@ var users = [
 
 app.get('/api/users', function(req, res){
     res.json(users)
+})
+
+app.post('/api/users', function(req, res){
+    var newUser = req.body;
+    newUser.id = new Date().getTime();
+    users.push(newUser)
+    res.json(newUser)
+})
+
+app.delete('/api/users/:id', function(req, res){
+    var index = _.findIndex(users, { id : req.params.id });
+    var deleted = users.splice(index, 1);
+    res.json(deleted)
 })
 
 app.get('/api/users/:id', function(req, res){

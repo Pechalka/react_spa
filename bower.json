@@ -17,6 +17,8 @@
     "jquery": "~2.1.4",
     "react-router": "~0.13.3",
     "react-bootstrap": "~0.22.6",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "reflux": "~0.2.7",
+    "lodash": "~3.9.3"
   }
 }

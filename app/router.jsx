@@ -6,8 +6,6 @@ var { Route, Link, State,
 	DefaultRoute } = Router;
 
 
-var { Route } = Router;
-
 var App = require('./components/App/app');
 var Layout = require('./components/Layout/Layout');
 var Login = require('./components/Login/login');

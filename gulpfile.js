@@ -19,6 +19,11 @@ var config = {
             {test: /\.jsx$/, loader: 'jsx-loader?harmony'}
         ]
     },
+    externals: {
+        //don't bundle the 'react' npm package with our bundle.js
+        //but get it from a global 'React' variable
+        'react': 'React'
+    },
     plugins: [
         new BowerWebpackPlugin({
             modulesDirectories: ['bower_components'],
@@ -48,6 +53,7 @@ gulp.task('watch', function(){
 
 gulp.task('server', function(){
 	connect.server({
+        port : 5000,
         //https://github.com/AveVlad/gulp-connect/issues/27 
         //TODO: use plugin for proxy
 		middleware: function(connect, o) {

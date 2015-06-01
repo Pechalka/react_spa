@@ -1,29 +1,57 @@
 var React = require('react');
 
-var Router = require('react-router');
-var Navigation = Router.Navigation;
+var { Navigation }  = require('react-router');
 
-var http = require('../../utils/http');
+var { Button, Well, Input } = require('react-bootstrap');
+
+
+var actions = require('./../../actions');
+var users = require('./../../stores/UserStore');
+
+var Reflux = require('reflux');
+
 
 var Users = React.createClass({
-	mixins : [Navigation],
+	mixins : [
+		Navigation,
+		Reflux.connect(users, 'users'),
+		React.addons.LinkedStateMixin
+	],
 	getInitialState: function() {
 		return {
-			users : [] 
+			name : '' 
 		};
 	},
 	componentDidMount: function() {
-		http.get('/api/users')
-			.then((json)=> this.setState({ users : json }))
+		actions.getUsers();
+	},
+	add : function(){
+		if (!this.state.name) return;//TODO: add validation
+
+		actions.addUser(this.state.name)
+
+		this.setState({ name : '' })
+	},
+	renderForm : function(){
+		var addBtn = <Button onClick={this.add}>add</Button>
+		return <Well>
+			<Input type="text" valueLink={this.linkState('name')} buttonAfter={addBtn}/>
+		</Well>
 	},
 	renderRow : function(u){
-		return <div key={u.id}>
+		return <div key={u.id} className="clearfix">
 			<a href={this.makeHref('userDetails', { id : u.id })}>{u.name}</a>
+			<Button className="pull-right" onClick={actions.removeUser.bind(null, u)}>remove</Button>
 		</div>
 	},
 	render: function() {
 		var users = this.state.users.map(this.renderRow);
-		return <div>{users}</div>
+		var form = this.renderForm();
+
+		return <div>
+			<div>{users}</div>
+			{form}
+		</div>
 	}
 
 });
